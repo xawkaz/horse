@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="toro_chevaux">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Styles CSS pour garantir un affichage correct -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Styles pour éviter les débordements */
+    #flutter_target {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Désactiver le zoom sur mobile */
+    @media (max-width: 768px) {
+      body {
+        touch-action: pan-x pan-y;
+      }
+    }
+  </style>
+
+  <title>toro_chevaux</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Script pour contrôler la taille de la fenêtre (uniquement sur Chrome) -->
+  <script>
+    // Dimensions idéales pour éviter les débordements
+    const IDEAL_WIDTH = 480;
+    const IDEAL_HEIGHT = 640;
+    const MIN_WIDTH = 400;
+    const MIN_HEIGHT = 600;
+    const MAX_WIDTH = 500;
+    const MAX_HEIGHT = 700;
+
+    // Fonction pour définir la taille de la fenêtre
+    function setWindowSize() {
+      // Vérifier si nous sommes dans Chrome
+      if (navigator.userAgent.indexOf('Chrome') > -1) {
+        // Définir une taille fixe pour la fenêtre
+        window.resizeTo(IDEAL_WIDTH, IDEAL_HEIGHT);
+        console.log("Taille de fenêtre fixée à " + IDEAL_WIDTH + "x" + IDEAL_HEIGHT);
+      }
+    }
+
+    // Fonction pour maintenir la taille de la fenêtre
+    function maintainWindowSize() {
+      // Vérifier si nous sommes dans Chrome
+      if (navigator.userAgent.indexOf('Chrome') > -1) {
+        // Obtenir les dimensions actuelles
+        const currentWidth = window.outerWidth;
+        const currentHeight = window.outerHeight;
+
+        // Vérifier si les dimensions sont hors limites
+        const tooLarge = currentWidth > MAX_WIDTH || currentHeight > MAX_HEIGHT;
+        const tooSmall = currentWidth < MIN_WIDTH || currentHeight < MIN_HEIGHT;
+
+        // Ajuster si nécessaire
+        if (tooLarge || tooSmall) {
+          window.resizeTo(IDEAL_WIDTH, IDEAL_HEIGHT);
+          console.log("Taille de fenêtre réajustée à " + IDEAL_WIDTH + "x" + IDEAL_HEIGHT);
+        }
+      }
+    }
+
+    // Exécuter la fonction au chargement de la page
+    window.addEventListener('load', setWindowSize);
+
+    // Ajouter un écouteur d'événement pour le redimensionnement
+    window.addEventListener('resize', maintainWindowSize);
+
+    // Vérifier périodiquement la taille de la fenêtre (toutes les 2 secondes)
+    setInterval(maintainWindowSize, 2000);
+  </script>
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
